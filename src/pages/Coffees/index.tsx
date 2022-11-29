@@ -1,15 +1,39 @@
 import styles from './Coffees.module.scss';
 import { useState, useRef } from 'react';
-import {
-  NumberInput,
-  Group,
-  ActionIcon,
-  NumberInputHandlers,
-} from '@mantine/core';
+import { Minus, Plus, ShoppingCartSimple } from 'phosphor-react';
 
 const Coffes = () => {
   const [value, setValue] = useState(0);
-  const handlers = useRef<NumberInputHandlers>();
+
+  function verifyValue(value: number) {
+    if (value > 20) setValue(20);
+    if (value < 0) setValue(0);
+  }
+
+  function decrement() {
+    if (value > 20) {
+      setValue(20);
+      return;
+    } else if (value <= 0) {
+      setValue(0);
+      return;
+    } else {
+      setValue(value - 1);
+    }
+  }
+
+  function increment() {
+    if (value >= 20) {
+      setValue(20);
+      return;
+    } else if (value < 0) {
+      setValue(0);
+      return;
+    } else {
+      setValue(value + 1);
+    }
+  }
+
   return (
     <main className={styles.main}>
       <h2 className={styles.sectionTitle}>Nossos cafés</h2>
@@ -24,37 +48,27 @@ const Coffes = () => {
           <span>
             R$ <strong>9,90</strong>
           </span>
-          <Group className={styles.groupBtn} spacing={5}>
-            <ActionIcon
-              size={32}
-              variant='default'
-              className={styles.minusBtn}
-              onClick={() => handlers.current && handlers.current.decrement()}
-            >
-              –
-            </ActionIcon>
+          <div className={styles.groupBtn}>
+            <button className={styles.minusBtn} onClick={decrement}>
+              <Minus size={16} weight='bold' />
+            </button>
 
-            <NumberInput
+            <input
               className={styles.numberInput}
-              hideControls
               value={value}
-              onChange={(val: number) => setValue(val)}
-              handlersRef={handlers}
+              onChange={(e) => setValue(Number(e.target.value))}
               type='number'
               min={0}
-              max={50}
-              step={1}
+              max={3}
+              onBlur={(e) => verifyValue(Number(e.target.value))}
             />
 
-            <ActionIcon
-              className={styles.plusBtn}
-              size={32}
-              variant='default'
-              onClick={() => handlers.current && handlers.current.increment()}
-            >
-              +
-            </ActionIcon>
-          </Group>
+            <button className={styles.plusBtn} onClick={increment}>
+              <Plus size={16} weight='bold' />
+            </button>
+          </div>
+          <div className={styles.cartIcon}></div>
+          <ShoppingCartSimple size={22} weight='fill' />
         </div>
       </div>
     </main>

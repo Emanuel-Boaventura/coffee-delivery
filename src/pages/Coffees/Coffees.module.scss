@@ -8,41 +8,54 @@
     margin-bottom: 3.375rem;
   }
 
-  .groupBtn {
-    background-color: var(--base-button);
-    display: inline-flex;
-    gap: 0;
-    margin: 0;
-    border: none;
-    color: var(--base-button);
-    border-radius: 10px;
+  .card {
+    background-color: var(--base-card);
+    width: 256px;
+    height: 310px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
 
-    div {
-      height: 32px;
-    }
+    .cardPrice {
+      .groupBtn {
+        background-color: var(--base-button);
+        color: var(--base-button);
+        border-radius: 4px;
+        display: inline-flex;
+        height: 2rem;
+        gap: 4px;
+        padding: 0.5rem;
 
-    button {
-      background-color: var(--base-button);
-      color: var(--purple);
-      border: none;
-      border-radius: 10px;
-      font-weight: 700;
-      // padding-bottom: 2px;
+        button {
+          background-color: var(--base-button);
+          color: var(--purple);
+          border: none;
+          font-weight: 700;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
 
-      &:hover {
-        color: var(--purple-dark);
+          &:hover {
+            color: var(--purple-dark);
+          }
+        }
+
+        input {
+          background-color: var(--base-button);
+          color: var(--base-title);
+          text-align: center;
+
+          border: none;
+          width: 20px;
+
+          &::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+          }
+        }
       }
-    }
-
-    input {
-      background-color: var(--base-button);
-      color: var(--base-title);
-      width: 1rem;
-      text-align: center;
-      border: none;
-      padding: 0;
-      min-height: 0;
-      height: 32px;
     }
   }
 }
