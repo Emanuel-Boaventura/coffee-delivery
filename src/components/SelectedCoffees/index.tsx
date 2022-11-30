@@ -13,11 +13,14 @@ const SelectedCoffess = () => {
           <div className={styles.coffeeContainer}>
             <img src={coffeExpresso} />
             <div className={styles.coffeeInfo}>
-              <Button />
-              <button className={styles.removeBtn}>
-                <Trash size={16} />
-                <p>REMOVER</p>
-              </button>
+              <p className={styles.coffeeType}> Expresso Tradicional</p>
+              <div className={styles.buttonsContainer}>
+                <Button />
+                <button className={styles.removeBtn}>
+                  <Trash size={16} weight='bold' />
+                  <p>REMOVER</p>
+                </button>
+              </div>
             </div>
             <span>R$ 9,90</span>
           </div>

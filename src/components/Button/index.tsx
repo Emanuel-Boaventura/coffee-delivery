@@ -3,7 +3,7 @@ import { useState } from 'react';
 import styles from './Button.module.scss';
 
 const Button = () => {
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(1);
 
   function verifyValue(value: number) {
     if (value > 20) setValue(20);
@@ -41,10 +41,9 @@ const Button = () => {
 
       <input
         className={styles.numberInput}
-        value={value}
         onChange={(e) => setValue(Number(e.target.value))}
+        value={value}
         type='number'
-        min={1}
         onBlur={(e) => verifyValue(Number(e.target.value))}
       />
 

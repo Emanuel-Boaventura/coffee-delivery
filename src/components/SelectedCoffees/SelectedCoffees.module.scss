@@ -1,32 +1,61 @@
 .coffeeContainer {
   display: flex;
+  border-bottom: 1px solid var(--base-button);
+  padding-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
+
+  img {
+    width: 4rem;
+  }
 
   .coffeeInfo {
+    margin-left: 1.25rem;
     display: flex;
+    flex-direction: column;
     gap: 0.5rem;
-    height: 2rem;
 
-    .removeBtn {
+    .coffeeType {
+      color: var(--base-subtitle);
+      font-weight: 700;
+    }
+
+    .buttonsContainer {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100%;
-      gap: 0.25rem;
-      border: none;
-      background-color: var(--base-button);
-      color: var(--purple);
-      padding: 8px;
-      border-radius: 6px;
+      gap: 0.5rem;
+      height: 2rem;
 
-      p {
-        font-size: 0.75rem;
-        color: var(--base-text);
-        font-weight: 700;
+      .removeBtn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        gap: 0.25rem;
+        border: none;
+        background-color: var(--base-button);
+        color: var(--purple);
+        padding: 8px;
+        border-radius: 6px;
+        cursor: pointer;
+
+        p {
+          font-size: 0.75rem;
+          color: var(--base-text);
+          font-weight: 700;
+        }
+
+        &:hover {
+          background-color: var(--base-hover);
+          color: var(--purple-dark);
+          p {
+            color: var(--base-subtitle);
+          }
+        }
       }
     }
   }
   span {
     font-weight: 700;
     color: var(--base-text);
+    margin-left: auto;
   }
 }
