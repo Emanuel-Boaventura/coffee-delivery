@@ -16,8 +16,8 @@ const Coffes = () => {
     if (value > 20) {
       setValue(20);
       return;
-    } else if (value <= 0) {
-      setValue(0);
+    } else if (value <= 1) {
+      setValue(1);
       return;
     } else {
       setValue(value - 1);
@@ -28,8 +28,8 @@ const Coffes = () => {
     if (value >= 20) {
       setValue(20);
       return;
-    } else if (value < 0) {
-      setValue(0);
+    } else if (value < 1) {
+      setValue(1);
       return;
     } else {
       setValue(value + 1);
@@ -58,8 +58,7 @@ const Coffes = () => {
             value={value}
             onChange={(e) => setValue(Number(e.target.value))}
             type='number'
-            min={0}
-            max={3}
+            min={1}
             onBlur={(e) => verifyValue(Number(e.target.value))}
           />
 
@@ -67,9 +66,9 @@ const Coffes = () => {
             <Plus size={16} weight='bold' />
           </button>
         </div>
-        <div className={styles.cartIcon}>
+        <button className={styles.cartIcon}>
           <ShoppingCartSimple size={22} weight='fill' />
-        </div>
+        </button>
       </div>
     </div>
   );
