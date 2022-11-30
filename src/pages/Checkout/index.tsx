@@ -10,9 +10,30 @@ const Checkout = () => {
       </section>
       <section className={styles.sectionPurchase}>
         <h3>Cafés selecionados</h3>
-        <div>
+        <div className={styles.purchaseContainer}>
           <SelectedCoffess />
         </div>
+        <div className={styles.priceInfo}>
+          <div className={styles.priceProducts}>
+            <p>Preço dos Produtos</p>
+            <span>
+              R$ <strong>33,20</strong>
+            </span>
+          </div>
+          <div className={styles.priceDelivery}>
+            <p>Entrega</p>
+            <span>
+              R$ <strong>33,20</strong>
+            </span>
+          </div>
+          <div className={styles.priceTotal}>
+            <p>Total</p>
+            <span>
+              R$ <strong>33,20</strong>
+            </span>
+          </div>
+        </div>
+        <button className={styles.purchaseConfirm}>CONFIRMAR COMPRA</button>
       </section>
     </div>
   );
