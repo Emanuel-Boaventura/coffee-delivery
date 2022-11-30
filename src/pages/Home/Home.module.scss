@@ -1,9 +1,8 @@
 .pageContainer {
   display: flex;
   flex-direction: column;
-  width: 70rem;
-  margin: 2rem auto;
   color: var(--base-title);
+  margin-top: 2rem;
 
   .header {
     display: flex;

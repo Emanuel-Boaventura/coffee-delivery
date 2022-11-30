@@ -1,0 +1,41 @@
+.header {
+  display: flex;
+  margin: 2rem 0;
+
+  .imageLink {
+    margin-right: auto;
+  }
+
+  .options {
+    display: flex;
+    gap: 0.75rem;
+
+    .mapPinIcon {
+      display: flex;
+      gap: 0.25rem;
+      align-items: center;
+      padding: 0.5rem;
+      background-color: var(--purple-light);
+      color: var(--purple-dark);
+      border-radius: 6px;
+
+      p {
+        font-weight: 700;
+      }
+    }
+
+    .cartIcon {
+      background-color: var(--yellow-light);
+      color: var(--yellow-dark);
+      padding: 0.5rem;
+      display: flex;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: color 0.15s;
+
+      &:hover {
+        color: var(--yellow);
+      }
+    }
+  }
+}

@@ -33,6 +33,17 @@
   font-weight: normal;
 }
 
-body {
-  background-color: var(--background);
+html {
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 0.5rem;
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--base-label);
+  border-radius: 100px;
 }
