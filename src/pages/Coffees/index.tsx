@@ -3,6 +3,7 @@ import { useState, useRef } from 'react';
 import { Minus, Plus, ShoppingCartSimple } from 'phosphor-react';
 
 import coffeExpresso from '../../assets/Type=Expresso.png';
+import Button from '../../components/Button';
 
 const Coffes = () => {
   const [value, setValue] = useState(0);
@@ -48,24 +49,7 @@ const Coffes = () => {
         <span>
           R$ <strong>9,90</strong>
         </span>
-        <div className={styles.groupBtn}>
-          <button className={styles.minusBtn} onClick={decrement}>
-            <Minus size={16} weight='bold' />
-          </button>
-
-          <input
-            className={styles.numberInput}
-            value={value}
-            onChange={(e) => setValue(Number(e.target.value))}
-            type='number'
-            min={1}
-            onBlur={(e) => verifyValue(Number(e.target.value))}
-          />
-
-          <button className={styles.plusBtn} onClick={increment}>
-            <Plus size={16} weight='bold' />
-          </button>
-        </div>
+        <Button />
         <button className={styles.cartIcon}>
           <ShoppingCartSimple size={22} weight='fill' />
         </button>
