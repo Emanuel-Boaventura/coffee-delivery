@@ -2,9 +2,10 @@ import { Coffee, Package, ShoppingCart, Timer } from 'phosphor-react';
 
 import styles from './Home.module.scss';
 import home from '../../assets/Home.png';
-import Coffes from '../Coffees';
+import Coffees from '../Coffees';
 
 const Home = () => {
+  const coffees = [1, 2, 3, 5, 6];
   return (
     <div className={styles.pageContainer}>
       <header className={styles.header}>
@@ -45,7 +46,14 @@ const Home = () => {
         </div>
         <img className={styles.headerImage} src={home} alt='' />
       </header>
-      <Coffes />
+      <main className={styles.main}>
+        <h2 className={styles.sectionTitle}>Nossos cafés</h2>
+        <div className={styles.coffeesContainer}>
+          {coffees.map(() => {
+            return <Coffees />;
+          })}
+        </div>
+      </main>
     </div>
   );
 };

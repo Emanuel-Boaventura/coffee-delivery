@@ -18,7 +18,7 @@
 
       .title {
         font-family: 'Baloo 2';
-        font-weight: bolder;
+        font-weight: 800;
         font-size: 3rem;
         line-height: 1.3;
       }
@@ -76,6 +76,24 @@
     .headerImage {
       width: 476px;
       height: 360px;
+    }
+  }
+
+  .main {
+    margin-top: 8.75rem;
+
+    .sectionTitle {
+      font-family: 'Baloo 2';
+      font-weight: 800;
+      font-size: 2rem;
+      margin-bottom: 3.375rem;
+    }
+
+    .coffeesContainer {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      row-gap: 2.5rem;
+      column-gap: 2rem;
     }
   }
 }

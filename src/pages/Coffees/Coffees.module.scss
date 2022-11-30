@@ -1,61 +1,110 @@
-.main {
-  margin-top: 8.75rem;
+.card {
+  background-color: var(--base-card);
+  width: 256px;
+  height: 310px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px 36px;
 
-  .sectionTitle {
-    font-family: 'Baloo 2';
-    font-weight: bolder;
-    font-size: 2rem;
-    margin-bottom: 3.375rem;
+  img {
+    height: 7.5rem;
+    width: 7.5rem;
+    transform: translateY(-1rem);
   }
 
-  .card {
-    background-color: var(--base-card);
-    width: 256px;
-    height: 310px;
+  .cardText {
+    text-align: center;
+    padding: 0 1.25rem;
+    margin-bottom: 2rem;
+
+    span {
+      font-size: 0.625rem;
+      font-weight: 700;
+      padding: 0.25rem 0.5rem;
+      background-color: var(--yellow-light);
+      color: var(--yellow-dark);
+      border-radius: 50px;
+    }
+
+    h3 {
+      margin-top: 1rem;
+      font-family: 'Baloo 2';
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      font-size: 1.25rem;
+    }
+
+    p {
+      color: var(--base-label);
+      font-size: 0.875rem;
+    }
+  }
+
+  .cardPrice {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin: 0 auto;
+    align-items: center;
+    margin-bottom: 1.25rem;
 
-    .cardPrice {
-      .groupBtn {
+    span {
+      font-size: 0.875rem;
+      color: var(--base-text);
+
+      strong {
+        font-family: 'Baloo 2';
+        font-size: 1.5rem;
+        font-weight: 800;
+      }
+    }
+
+    .groupBtn {
+      margin-left: 1.5rem;
+      margin-right: 0.5rem;
+      background-color: var(--base-button);
+      color: var(--base-button);
+      border-radius: 4px;
+      display: inline-flex;
+      height: 2.375rem;
+      gap: 6px;
+      padding: 0.5rem;
+
+      button {
         background-color: var(--base-button);
-        color: var(--base-button);
-        border-radius: 4px;
-        display: inline-flex;
-        height: 2rem;
-        gap: 4px;
-        padding: 0.5rem;
+        color: var(--purple);
+        border: none;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
 
-        button {
-          background-color: var(--base-button);
-          color: var(--purple);
-          border: none;
-          font-weight: 700;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          cursor: pointer;
-
-          &:hover {
-            color: var(--purple-dark);
-          }
-        }
-
-        input {
-          background-color: var(--base-button);
-          color: var(--base-title);
-          text-align: center;
-
-          border: none;
-          width: 20px;
-
-          &::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            -moz-appearance: none;
-          }
+        &:hover {
+          color: var(--purple-dark);
         }
       }
+
+      input {
+        background-color: var(--base-button);
+        color: var(--base-title);
+        text-align: center;
+
+        border: none;
+        width: 20px;
+
+        &::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          -moz-appearance: none;
+        }
+      }
+    }
+
+    .cartIcon {
+      background-color: var(--purple-dark);
+      color: var(--white);
+      padding: 0.5rem;
+      display: flex;
+      border-radius: 6px;
     }
   }
 }
