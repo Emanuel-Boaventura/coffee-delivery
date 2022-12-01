@@ -11,6 +11,23 @@ import styles from './Checkout.module.scss';
 
 const Checkout = () => {
   const [paymentMethod, setPaymentMethod] = useState('');
+  const buttonsObject = [
+    {
+      name: 'CARTÃO DE CRÉDITO',
+      value: 'credit',
+      icon: <CreditCard size={18} weight='bold' />,
+    },
+    {
+      name: 'CARTÃO DE DÉBITO',
+      value: 'debit',
+      icon: <Bank size={18} weight='bold' />,
+    },
+    {
+      name: 'DINHEIRO',
+      value: 'money',
+      icon: <Money size={18} weight='bold' />,
+    },
+  ];
 
   return (
     <div className={styles.pageContainer}>
@@ -59,39 +76,20 @@ const Checkout = () => {
             </div>
           </header>
           <main className={styles.paymentContainer}>
-            <button
-              onClick={() => setPaymentMethod('credit')}
-              className={`${styles.paymentBtn} ${
-                paymentMethod == 'credit' && styles.paymentChosen
-              }`}
-            >
-              <span className={styles.iconBtn}>
-                <CreditCard size={18} weight='bold' />
-              </span>
-              <p>CARTÃO DE CRÉDITO</p>
-            </button>
-            <button
-              onClick={() => setPaymentMethod('debit')}
-              className={`${styles.paymentBtn} ${
-                paymentMethod == 'debit' && styles.paymentChosen
-              }`}
-            >
-              <span className={styles.iconBtn}>
-                <Bank size={18} weight='bold' />
-              </span>
-              <p>CARTÃO DE DÉBITO</p>
-            </button>
-            <button
-              onClick={() => setPaymentMethod('money')}
-              className={`${styles.paymentBtn} ${
-                paymentMethod == 'money' && styles.paymentChosen
-              }`}
-            >
-              <span className={styles.iconBtn}>
-                <Money size={18} weight='bold' />
-              </span>
-              <p>DINHEIRO</p>
-            </button>
+            {buttonsObject.map((btn, index) => {
+              return (
+                <button
+                  key={`paymentButton-${index}`}
+                  onClick={() => setPaymentMethod(btn.value)}
+                  className={`${styles.paymentBtn} ${
+                    paymentMethod === btn.value && styles.paymentChosen
+                  }`}
+                >
+                  <span className={styles.iconBtn}>{btn.icon}</span>
+                  <p>{btn.name}</p>
+                </button>
+              );
+            })}
           </main>
         </section>
       </div>
