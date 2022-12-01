@@ -8,9 +8,9 @@ const SelectedCoffess = () => {
 
   return (
     <div>
-      {coffees.map(() => {
+      {coffees.map((_, index) => {
         return (
-          <div className={styles.coffeeContainer}>
+          <div key={`coffee-${index}`} className={styles.coffeeContainer}>
             <img src={coffeExpresso} />
             <div className={styles.coffeeInfo}>
               <p className={styles.coffeeType}> Expresso Tradicional</p>

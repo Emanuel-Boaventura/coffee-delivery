@@ -1,54 +1,189 @@
 .pageContainer {
   display: flex;
-  flex-direction: column;
+  gap: 2rem;
   color: var(--base-title);
 
-  .sectionPurchase {
-    width: 28rem;
-    background-color: var(--base-card);
-    padding: 2.5rem;
-    border-radius: 6px 44px;
+  h2 {
+    font-family: 'Baloo 2';
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+  }
 
-    .priceInfo {
+  .infoContainer {
+    width: 40rem;
+
+    .sectionHeader {
       display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
+      gap: 0.5rem;
+      color: var(--yellow-dark);
       margin-bottom: 2rem;
-      font-size: 0.875rem;
 
-      div {
-        display: flex;
-        justify-content: space-between;
-
-        span {
-          font-weight: normal;
+      .sectionTitle {
+        h3 {
+          color: var(--base-subtitle);
         }
-      }
-
-      .priceTotal {
-        display: flex;
-        justify-content: space-between;
-        font-size: 1.25rem;
 
         p {
-          font-weight: 700;
+          color: var(--base-text);
         }
       }
     }
-    .purchaseConfirm {
-      width: 100%;
-      background-color: var(--yellow);
-      color: var(--white);
-      border: none;
-      border-radius: 6px;
-      padding: 0.75rem;
-      font-weight: 700;
-      line-height: 1.6;
-      cursor: pointer;
-      transition: all 0.15s;
 
-      &:hover {
-        background-color: var(--yellow-dark);
+    .sectionInfo,
+    .sectionCard {
+      padding: 2.5rem;
+      background-color: var(--base-card);
+      border-radius: 6px;
+
+      .inputContainer {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: 1fr;
+
+        input,
+        select,
+        option {
+          width: 100%;
+          padding: 0.75rem;
+          border: 1px solid var(--base-button);
+          background-color: var(--base-input);
+          border-radius: 4px;
+          color: var(--base-text);
+          font-size: 0.875rem;
+
+          &::placeholder {
+            color: var(--base-label);
+          }
+
+          &::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+          }
+        }
+
+        .firstPart {
+          display: grid;
+          grid-template-columns: 30%;
+        }
+        .secondPart {
+          display: grid;
+          grid-template-columns: 1fr;
+        }
+
+        .thirdPart {
+          display: grid;
+          gap: 0.75rem;
+          grid-template-columns: 30% auto;
+        }
+        .fourthPart {
+          display: grid;
+          gap: 0.75rem;
+          grid-template-columns: 30% 1fr 12%;
+        }
+      }
+    }
+
+    .sectionCard {
+      margin-top: 0.75rem;
+
+      .sectionHeader {
+        color: var(--purple);
+      }
+
+      .paymentContainer {
+        display: flex;
+        justify-content: center;
+        gap: 0.75rem;
+
+        .paymentBtn {
+          border: none;
+          background-color: var(--base-button);
+          color: var(--purple);
+          border-radius: 6px;
+          padding: 1rem;
+          width: 100%;
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
+          cursor: pointer;
+          transition: all 0.15s;
+
+          &:hover {
+            background-color: var(--base-hover);
+          }
+
+          .iconBtn {
+            display: flex;
+            align-items: center;
+          }
+
+          p {
+            text-align: start;
+            font-size: 0.75rem;
+            color: var(--base-text);
+            width: 100%;
+            font-weight: 700;
+          }
+
+          &.paymentChosen {
+            background-color: var(--purple-light);
+            box-shadow: inset 0 0 0 1px var(--purple-dark);
+          }
+        }
+      }
+    }
+  }
+
+  .sectionPurchase {
+    width: 28rem;
+
+    .purchaseContainer {
+      padding: 2.5rem;
+      border-radius: 6px 44px;
+      background-color: var(--base-card);
+      .priceInfo {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        margin-bottom: 2rem;
+        font-size: 0.875rem;
+
+        div {
+          display: flex;
+          justify-content: space-between;
+
+          strong {
+            font-weight: normal;
+          }
+        }
+
+        .priceTotal {
+          display: flex;
+          justify-content: space-between;
+          font-size: 1.25rem;
+
+          p,
+          span,
+          strong {
+            font-weight: 700;
+          }
+        }
+      }
+      .purchaseConfirm {
+        width: 100%;
+        background-color: var(--yellow);
+        color: var(--white);
+        border: none;
+        border-radius: 6px;
+        padding: 0.75rem;
+        font-weight: 700;
+        line-height: 1.6;
+        cursor: pointer;
+        transition: all 0.15s;
+
+        &:hover {
+          background-color: var(--yellow-dark);
+        }
       }
     }
   }
