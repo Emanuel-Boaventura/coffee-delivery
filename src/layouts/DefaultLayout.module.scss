@@ -1,7 +1,10 @@
-.contentContainer {
-  display: flex;
-  flex-direction: column;
-  width: 70rem;
+.wrapperContentContainer {
   margin: 0 auto;
-  margin-bottom: 10rem;
+  max-width: 74rem;
+  .contentContainer {
+    display: flex;
+    flex-direction: column;
+    margin: 0 2rem;
+    margin-bottom: 10rem;
+  }
 }
