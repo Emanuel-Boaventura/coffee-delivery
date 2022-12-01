@@ -49,8 +49,8 @@ const Home = () => {
       <main className={styles.main}>
         <h2 className={styles.sectionTitle}>Nossos cafés</h2>
         <div className={styles.coffeesContainer}>
-          {coffees.map(() => {
-            return <Coffees />;
+          {coffees.map((_, index) => {
+            return <Coffees key={`coffee-${index}`} />;
           })}
         </div>
       </main>

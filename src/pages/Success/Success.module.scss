@@ -28,55 +28,64 @@
     }
   }
 
-  .main {
-    width: 32.875rem;
-    margin-top: 2.5rem;
-    background: linear-gradient(102.89deg, #dbac2c 2.61%, #8047f8 98.76%);
-    border-radius: 6px 36px;
+  main {
     display: flex;
+    gap: 6rem;
     align-items: center;
-    justify-content: center;
+    margin-top: 2.5rem;
 
-    .mainContent {
-      border-radius: 5px 35px;
-      background-color: var(--background);
-      width: 100%;
+    .mainContentWrapper {
+      min-width: 32.875rem;
+      background: linear-gradient(102.89deg, #dbac2c 2.61%, #8047f8 98.76%);
+      border-radius: 6px 36px;
       display: flex;
-      flex-direction: column;
-      gap: 2rem;
-      padding: 2.5rem;
-      margin: 1px;
 
-      div {
+      .mainContent {
+        border-radius: 5px 35px;
+        background-color: var(--background);
+        width: 100%;
         display: flex;
-        align-items: center;
-        gap: 12px;
+        flex-direction: column;
+        gap: 2rem;
+        padding: 2.5rem;
+        margin: 1px;
 
-        p {
-          color: var(--base-text);
-        }
-
-        .iconContainer {
-          border-radius: 100%;
-          height: 32px;
-          width: 32px;
+        .deliveryInfo {
           display: flex;
           align-items: center;
-          justify-content: center;
-          color: var(--white);
+          gap: 12px;
 
-          .iconMapPin {
-            background-color: var(--purple-dark);
+          p {
+            color: var(--base-text);
           }
 
-          &.iconTimer {
-            background-color: var(--yellow);
-          }
-          .iconMoney {
-            background-color: var(--yellow-dark);
+          .iconContainer {
+            border-radius: 100%;
+            height: 32px;
+            width: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+
+            &.iconMapPin {
+              background-color: var(--purple-dark);
+            }
+
+            &.iconTimer {
+              background-color: var(--yellow);
+            }
+
+            &.iconMoney {
+              background-color: var(--yellow-dark);
+            }
           }
         }
       }
+    }
+
+    .mainImage {
+      width: fit-content;
     }
   }
 }
