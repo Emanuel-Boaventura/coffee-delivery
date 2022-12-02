@@ -1,9 +1,11 @@
 import { Minus, Plus } from 'phosphor-react';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { CartContext } from '../../providers/CartContext';
 import styles from './Button.module.scss';
 
 const Button = () => {
   const [value, setValue] = useState(1);
+  const { cartItens, addItemCart } = useContext(CartContext);
 
   function verifyValue(value: number) {
     if (value > 20) setValue(20);
@@ -25,6 +27,8 @@ const Button = () => {
   function increment() {
     if (value >= 20) {
       setValue(20);
+      addItemCart();
+      console.log(cartItens);
       return;
     } else if (value < 1) {
       setValue(1);
