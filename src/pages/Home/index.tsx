@@ -1,11 +1,18 @@
-import { Coffee, Package, ShoppingCart, Timer } from 'phosphor-react';
+import {
+  Coffee,
+  Package,
+  ShoppingCart,
+  ShoppingCartSimple,
+  Timer,
+} from 'phosphor-react';
 
 import styles from './Home.module.scss';
 import home from '../../assets/Home.png';
-import Coffees from '../Coffees';
+import { coffees } from '../../database/coffees';
+
+import Button from '../../components/Button';
 
 const Home = () => {
-  const coffees = [1, 2, 3, 5, 6];
   return (
     <div className={styles.pageContainer}>
       <header className={styles.header}>
@@ -49,8 +56,30 @@ const Home = () => {
       <main className={styles.main}>
         <h2 className={styles.sectionTitle}>Nossos cafés</h2>
         <div className={styles.coffeesContainer}>
-          {coffees.map((_, index) => {
-            return <Coffees key={`coffee-${index}`} />;
+          {coffees.map((coffee, index) => {
+            return (
+              <div key={`coffee-${index}`} className={styles.card}>
+                <img src={coffee.image} alt={`Foto do Café ${coffee.name}`} />
+                <div className={styles.cardText}>
+                  <div className={styles.coffeTags}>
+                    {coffee.tags.map((tag) => (
+                      <span key={`tag-${tag}`}>{tag}</span>
+                    ))}
+                  </div>
+                  <h3>{coffee.name}</h3>
+                  <p>{coffee.subtitle}</p>
+                </div>
+                <div className={styles.cardPrice}>
+                  <span>
+                    R$ <strong>{coffee.price}</strong>
+                  </span>
+                  <Button />
+                  <button className={styles.cartIcon}>
+                    <ShoppingCartSimple size={22} weight='fill' />
+                  </button>
+                </div>
+              </div>
+            );
           })}
         </div>
       </main>

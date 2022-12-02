@@ -11,6 +11,7 @@ import styles from './Checkout.module.scss';
 
 const Checkout = () => {
   const [paymentMethod, setPaymentMethod] = useState('');
+
   const buttonsObject = [
     {
       name: 'CARTÃO DE CRÉDITO',

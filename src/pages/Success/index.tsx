@@ -67,7 +67,7 @@ const Success = () => {
             })}
           </div>
         </div>
-        <img src={illustration} alt='' />
+        <img src={illustration} alt='Ilustração de um Motoboy' />
       </main>
     </div>
   );
