@@ -59,6 +59,11 @@
             -webkit-appearance: none;
             -moz-appearance: none;
           }
+
+          &:focus {
+            border: 1px solid var(--yellow-dark);
+            box-shadow: none;
+          }
         }
 
         .firstPart {

@@ -56,14 +56,14 @@ const Home = () => {
       <main className={styles.main}>
         <h2 className={styles.sectionTitle}>Nossos cafés</h2>
         <div className={styles.coffeesContainer}>
-          {coffees.map((coffee, index) => {
+          {coffees.map((coffee, coffeeIndex) => {
             return (
-              <div key={`coffee-${index}`} className={styles.card}>
+              <div key={`coffee-${coffeeIndex}`} className={styles.card}>
                 <img src={coffee.image} alt={`Foto do Café ${coffee.name}`} />
                 <div className={styles.cardText}>
                   <div className={styles.coffeTags}>
-                    {coffee.tags.map((tag) => (
-                      <span key={`tag-${tag}`}>{tag}</span>
+                    {coffee.tags.map((tag, tagIndex) => (
+                      <span key={`tag-${coffeeIndex}${tagIndex}`}>{tag}</span>
                     ))}
                   </div>
                   <h3>{coffee.name}</h3>
