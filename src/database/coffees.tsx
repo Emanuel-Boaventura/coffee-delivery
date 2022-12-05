@@ -19,6 +19,7 @@ export const coffees = [
     subtitle: 'O tradicional café feito com água quente e grãos moídos',
     price: '4,50',
     tags: ['TRADICIONAL'],
+    id: 1,
     image: expresso,
   },
   {
@@ -26,6 +27,7 @@ export const coffees = [
     subtitle: 'Expresso diluído, menos intenso que o tradicional',
     price: '5,00',
     tags: ['TRADICIONAL'],
+    id: 2,
     image: americano,
   },
   {
@@ -33,6 +35,7 @@ export const coffees = [
     subtitle: 'Café expresso tradicional com espuma cremosa',
     price: '8,00',
     tags: ['TRADICIONAL'],
+    id: 3,
     image: cremoso,
   },
   {
@@ -40,6 +43,7 @@ export const coffees = [
     subtitle: 'Bebida preparada com café expresso e cubos de gelo',
     price: '9,90',
     tags: ['TRADICIONAL', 'GELADO'],
+    id: 4,
     image: gelado,
   },
   {
@@ -47,6 +51,7 @@ export const coffees = [
     subtitle: 'Meio a meio de expresso tradicional com leite vaporizado',
     price: '6,50',
     tags: ['TRADICIONAL', 'COM LEITE'],
+    id: 5,
     image: cafeComLeite,
   },
   {
@@ -54,6 +59,7 @@ export const coffees = [
     subtitle: 'Uma dose de café expresso com o dobro de leite e espuma cremosa',
     price: '9,90',
     tags: ['TRADICIONAL', 'COM LEITE'],
+    id: 6,
     image: latte,
   },
   {
@@ -61,6 +67,7 @@ export const coffees = [
     subtitle: 'Bebida com canela feita de doses iguais de café, leite e espuma',
     price: '12,90',
     tags: ['TRADICIONAL', 'COM LEITE'],
+    id: 7,
     image: capuccino,
   },
   {
@@ -68,6 +75,7 @@ export const coffees = [
     subtitle: 'Café expresso misturado com um pouco de leite quente e espuma',
     price: '9,90',
     tags: ['TRADICIONAL', 'COM LEITE'],
+    id: 8,
     image: macchiato,
   },
   {
@@ -75,6 +83,7 @@ export const coffees = [
     subtitle: 'Café expresso com calda de chocolate, pouco leite e espuma',
     price: '14,90',
     tags: ['TRADICIONAL', 'COM LEITE'],
+    id: 9,
     image: mochaccino,
   },
   {
@@ -82,6 +91,7 @@ export const coffees = [
     subtitle: 'Bebida feita com chocolate dissolvido no leite quente e café',
     price: '16,90',
     tags: ['ESPECIAL', 'COM LEITE'],
+    id: 10,
     image: chocolateQuente,
   },
   {
@@ -89,6 +99,7 @@ export const coffees = [
     subtitle: 'Drink gelado de café expresso com rum, creme de leite e hortelã',
     price: '8,90',
     tags: ['ESPECIAL', 'ALCOÓLICO', 'GELADO'],
+    id: 11,
     image: cubano,
   },
   {
@@ -96,6 +107,7 @@ export const coffees = [
     subtitle: 'Bebida adocicada preparada com café e leite de coco',
     price: '17,90',
     tags: ['ESPECIAL'],
+    id: 12,
     image: havaiano,
   },
   {
@@ -103,6 +115,7 @@ export const coffees = [
     subtitle: 'Bebida preparada com grãos de café árabe e especiarias',
     price: '19,90',
     tags: ['ESPECIAL'],
+    id: 13,
     image: arabe,
   },
   {
@@ -110,6 +123,9 @@ export const coffees = [
     subtitle: 'Bebida a base de café, uísque irlandês, açúcar e chantilly',
     price: '24,90',
     tags: ['ESPECIAL', 'ALCOÓLICO'],
+    id: 14,
     image: irlandes,
   },
 ];
+
+export type TCoffeeData = typeof coffees[number];

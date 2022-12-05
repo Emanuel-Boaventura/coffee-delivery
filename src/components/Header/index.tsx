@@ -20,8 +20,12 @@ const Header = () => {
         </div>
         <NavLink className={styles.cartIcon} to='/checkout'>
           <ShoppingCart size={22} weight='fill' />
-          <span className={`${styles.cartItens} ${cartItens && styles.filled}`}>
-            {cartItens}
+          <span
+            className={`${styles.cartItens} ${
+              cartItens.length > 0 && styles.filled
+            }`}
+          >
+            {cartItens.length}
           </span>
         </NavLink>
       </div>

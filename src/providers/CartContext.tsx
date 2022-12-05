@@ -1,17 +1,37 @@
-import { createContext, useState } from 'react';
+import { createContext, ReactNode, useState } from 'react';
 
-export const CartContext = createContext({
-  cartItens: 0,
-  addItemCart: () => {},
-});
+interface ICartContext {
+  cartItens: IItem[];
+  addItemCart: (item: IItem, quantity: number) => void;
+}
 
-export const CartProvider = ({ children }: any) => {
-  const [cartItens, setCartItens] = useState(0);
+interface ICartProviderProps {
+  children: ReactNode;
+}
 
-  function addItemCart() {
-    const newCartItens = cartItens + 1;
-    setCartItens(newCartItens);
-    console.log('Item adicionado, quantidade atual: ', newCartItens);
+export const CartContext = createContext<ICartContext>({} as ICartContext);
+
+export interface IItem {
+  name: string;
+  price: string;
+  image: string;
+  id: number;
+}
+
+export const CartProvider = ({ children }: ICartProviderProps) => {
+  const [cartItens, setCartItens] = useState<IItem[]>([]);
+
+  function addItemCart({ name, price, image, id }: IItem, quantity: number) {
+    setCartItens([
+      ...cartItens,
+      {
+        name,
+        price,
+        image,
+        id,
+      },
+    ]);
+    console.log(quantity);
   }
 
   return (

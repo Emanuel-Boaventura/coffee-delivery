@@ -3,39 +3,27 @@ import { useContext, useState } from 'react';
 import { CartContext } from '../../providers/CartContext';
 import styles from './Button.module.scss';
 
-const Button = () => {
-  const [value, setValue] = useState(1);
-  const { cartItens, addItemCart } = useContext(CartContext);
+interface IButtonProps {
+  updateQuantity: (quantity: number) => void;
+}
 
-  function verifyValue(value: number) {
-    if (value > 20) setValue(20);
-    if (value < 0) setValue(0);
+const Button = ({ updateQuantity }: IButtonProps) => {
+  const [quantity, setQuantity] = useState(1);
+
+  function increment() {
+    if (quantity < 20) setQuantity((state) => state + 1);
   }
 
   function decrement() {
-    if (value > 20) {
-      setValue(20);
-      return;
-    } else if (value <= 1) {
-      setValue(1);
-      return;
-    } else {
-      setValue(value - 1);
-    }
+    if (quantity > 0) setQuantity((state) => state - 1);
   }
 
-  function increment() {
-    if (value >= 20) {
-      setValue(20);
-      return;
-    } else if (value < 1) {
-      setValue(1);
-      return;
-    } else {
-      addItemCart();
-      setValue(value + 1);
-    }
+  function onChange(value: number) {
+    if (value > 20) return setQuantity(20);
+    if (value < 0) return setQuantity(0);
+    setQuantity(value);
   }
+
   return (
     <div className={styles.groupBtn}>
       <button className={styles.minusBtn} onClick={decrement}>
@@ -44,10 +32,9 @@ const Button = () => {
 
       <input
         className={styles.numberInput}
-        onChange={(e) => setValue(Number(e.target.value))}
-        value={value}
+        onChange={(e) => onChange(Number(e.target.value))}
+        value={quantity}
         type='number'
-        onBlur={(e) => verifyValue(Number(e.target.value))}
       />
 
       <button className={styles.plusBtn} onClick={increment}>
