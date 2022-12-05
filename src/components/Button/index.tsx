@@ -27,13 +27,12 @@ const Button = () => {
   function increment() {
     if (value >= 20) {
       setValue(20);
-      addItemCart();
-      console.log(cartItens);
       return;
     } else if (value < 1) {
       setValue(1);
       return;
     } else {
+      addItemCart();
       setValue(value + 1);
     }
   }
