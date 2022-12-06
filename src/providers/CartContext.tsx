@@ -26,21 +26,34 @@ export interface ICartItens extends IItem {
 export const CartProvider = ({ children }: ICartProviderProps) => {
   const [cartItens, setCartItens] = useState<ICartItens[]>([]);
 
-  useEffect(() => {
-    console.log(cartItens);
-  }, [cartItens]);
+  // useEffect(() => {
+  //   console.log(cartItens);
+  // }, [cartItens]);
 
   function addItemCart({ name, price, image, id }: IItem, quantity: number) {
-    setCartItens([
-      ...cartItens,
-      {
-        name,
-        price,
-        image,
-        id,
-        quantity,
-      },
-    ]);
+    let edited = false;
+    const newContext = cartItens.map((item) => {
+      if (item.id === id) {
+        edited = true;
+        return { ...item, quantity: quantity };
+      }
+      return item;
+    });
+
+    if (edited) {
+      setCartItens(newContext);
+    } else {
+      setCartItens([
+        ...cartItens,
+        {
+          name,
+          price,
+          image,
+          id,
+          quantity,
+        },
+      ]);
+    }
   }
 
   function changeQuantityCartItem(itemId: number, newQuantity: number) {
