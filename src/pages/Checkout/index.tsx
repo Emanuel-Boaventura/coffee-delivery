@@ -34,28 +34,18 @@ const Checkout = () => {
     },
   ];
 
-  const productsPrice = currencyMask(
-    cartItens.reduce(
-      (accumulator, coffee) =>
-        accumulator +
-        ((Number(coffee.price.replace(/\D/g, '')) * coffee.quantity) / 10 || 0),
-      0
-    )
+  const productsPrice = cartItens.reduce(
+    (accumulator, coffee) =>
+      accumulator + Number(coffee.price.replace(/\D/g, '')) * coffee.quantity,
+    0
   );
 
-  let deliveryPrice = currencyMask(
-    cartItens.reduce(
-      (accumulator, coffee) =>
-        accumulator +
-        ((Number('1,50'.replace(/\D/g, '')) * coffee.quantity) / 10 || 0),
-      0
-    )
+  let deliveryPrice = cartItens.reduce(
+    (accumulator, coffee) => accumulator + 150 * coffee.quantity,
+    0
   );
 
-  let totalOrderPrice = currencyMask(
-    (Number(productsPrice.replace(/\D/g, '')) / 10 || 0) +
-      (Number(deliveryPrice.replace(/\D/g, '')) / 10 || 0)
-  );
+  let totalOrderPrice = productsPrice + deliveryPrice;
 
   return (
     <div className={styles.pageContainer}>
@@ -131,24 +121,26 @@ const Checkout = () => {
             <div className={styles.priceProducts}>
               <p>Preço dos Produtos</p>
               <span>
-                R$ <strong>{productsPrice}</strong>
+                R$ <strong>{currencyMask(productsPrice)}</strong>
               </span>
             </div>
             <div className={styles.priceDelivery}>
               <p>Entrega</p>
               <span>
-                R$ <strong>{deliveryPrice}</strong>
+                R$ <strong>{currencyMask(deliveryPrice)}</strong>
               </span>
             </div>
             <div className={styles.priceTotal}>
               <p>Total</p>
               <span>
-                R$ <strong>{totalOrderPrice}</strong>
+                R$ <strong>{currencyMask(totalOrderPrice)}</strong>
               </span>
             </div>
           </div>
           <button
-            onClick={() => console.log(cartItens)}
+            onClick={() => {
+              console.log('teste');
+            }}
             className={styles.purchaseConfirm}
           >
             CONFIRMAR COMPRA

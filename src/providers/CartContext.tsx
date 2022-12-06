@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useEffect, useState } from 'react';
+import { createContext, ReactNode, useState } from 'react';
 
 interface ICartContext {
   cartItens: ICartItens[];
@@ -25,10 +25,6 @@ export interface ICartItens extends IItem {
 
 export const CartProvider = ({ children }: ICartProviderProps) => {
   const [cartItens, setCartItens] = useState<ICartItens[]>([]);
-
-  // useEffect(() => {
-  //   console.log(cartItens);
-  // }, [cartItens]);
 
   function addItemCart({ name, price, image, id }: IItem, quantity: number) {
     let edited = false;
