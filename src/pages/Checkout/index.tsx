@@ -8,9 +8,11 @@ import {
 import { useState } from 'react';
 import SelectedCoffess from '../../components/SelectedCoffees';
 import styles from './Checkout.module.scss';
+import { coffees } from '../../database/coffees';
 
 const Checkout = () => {
   const [paymentMethod, setPaymentMethod] = useState('');
+  const newCoffesList = coffees.slice(0, 3);
 
   const buttonsObject = [
     {
@@ -97,7 +99,9 @@ const Checkout = () => {
       <section className={styles.sectionPurchase}>
         <h2>Cafés selecionados</h2>
         <div className={styles.purchaseContainer}>
-          <SelectedCoffess />
+          {newCoffesList.map((coffee) => (
+            <SelectedCoffess coffee={coffee} key={coffee.id} />
+          ))}
           <div className={styles.priceInfo}>
             <div className={styles.priceProducts}>
               <p>Preço dos Produtos</p>

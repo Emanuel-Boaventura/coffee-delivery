@@ -9,10 +9,6 @@ const Card = ({ coffee }: { coffee: TCoffeeData }) => {
   const { addItemCart } = useContext(CartContext);
   const [actualQuantity, setQuantity] = useState(1);
 
-  function updateQuantity(quantity: number) {
-    setQuantity(actualQuantity);
-  }
-
   return (
     <div className={styles.card}>
       <img src={coffee.image} alt={`Foto do Café ${coffee.name}`} />
@@ -29,7 +25,7 @@ const Card = ({ coffee }: { coffee: TCoffeeData }) => {
         <span>
           R$ <strong>{coffee.price}</strong>
         </span>
-        <Button updateQuantity={updateQuantity} />
+        <Button quantity={actualQuantity} setQuantity={setQuantity} />
         <button
           onClick={() => {
             addItemCart(coffee, actualQuantity);

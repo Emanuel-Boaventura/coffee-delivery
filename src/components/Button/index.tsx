@@ -1,21 +1,18 @@
 import { Minus, Plus } from 'phosphor-react';
-import { useContext, useState } from 'react';
-import { CartContext } from '../../providers/CartContext';
 import styles from './Button.module.scss';
 
 interface IButtonProps {
-  updateQuantity: (quantity: number) => void;
+  quantity: number;
+  setQuantity: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const Button = ({ updateQuantity }: IButtonProps) => {
-  const [quantity, setQuantity] = useState(1);
-
+const Button = ({ quantity, setQuantity }: IButtonProps) => {
   function increment() {
     if (quantity < 20) setQuantity((state) => state + 1);
   }
 
   function decrement() {
-    if (quantity > 0) setQuantity((state) => state - 1);
+    if (quantity > 1) setQuantity((state) => state - 1);
   }
 
   function onChange(value: number) {
@@ -33,8 +30,9 @@ const Button = ({ updateQuantity }: IButtonProps) => {
       <input
         className={styles.numberInput}
         onChange={(e) => onChange(Number(e.target.value))}
-        value={quantity}
+        value={quantity.toString()}
         type='number'
+        onBlur={(e) => e.target.value === '0' && setQuantity(1)} // se colocar 0 no input e sair agora fica 1, impedindo do valor ser 0
       />
 
       <button className={styles.plusBtn} onClick={increment}>
