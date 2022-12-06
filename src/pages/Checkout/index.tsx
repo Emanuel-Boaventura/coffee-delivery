@@ -13,6 +13,7 @@ import currencyMask from '../../utils/currencyMask';
 
 const Checkout = () => {
   const [paymentMethod, setPaymentMethod] = useState('');
+  const deliveryPricePerCoffe = 150; // 150 / 100 = 1.5 que convertem em R$ 1,50
 
   const { cartItens } = useContext(CartContext);
 
@@ -41,7 +42,8 @@ const Checkout = () => {
   );
 
   let deliveryPrice = cartItens.reduce(
-    (accumulator, coffee) => accumulator + 150 * coffee.quantity,
+    (accumulator, coffee) =>
+      accumulator + deliveryPricePerCoffe * coffee.quantity,
     0
   );
 
