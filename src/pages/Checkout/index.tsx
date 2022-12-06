@@ -5,14 +5,16 @@ import {
   MapPinLine,
   Money,
 } from 'phosphor-react';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import SelectedCoffess from '../../components/SelectedCoffees';
 import styles from './Checkout.module.scss';
-import { coffees } from '../../database/coffees';
+import { CartContext } from '../../providers/CartContext';
+import currencyMask from '../../utils/currencyMask';
 
 const Checkout = () => {
   const [paymentMethod, setPaymentMethod] = useState('');
-  const newCoffesList = coffees.slice(0, 3);
+
+  const { cartItens } = useContext(CartContext);
 
   const buttonsObject = [
     {
@@ -31,6 +33,29 @@ const Checkout = () => {
       icon: <Money size={18} weight='bold' />,
     },
   ];
+
+  const productsPrice = currencyMask(
+    cartItens.reduce(
+      (accumulator, coffee) =>
+        accumulator +
+        ((Number(coffee.price.replace(/\D/g, '')) * coffee.quantity) / 10 || 0),
+      0
+    )
+  );
+
+  let deliveryPrice = currencyMask(
+    cartItens.reduce(
+      (accumulator, coffee) =>
+        accumulator +
+        ((Number('1,50'.replace(/\D/g, '')) * coffee.quantity) / 10 || 0),
+      0
+    )
+  );
+
+  let totalOrderPrice = currencyMask(
+    (Number(productsPrice.replace(/\D/g, '')) / 10 || 0) +
+      (Number(deliveryPrice.replace(/\D/g, '')) / 10 || 0)
+  );
 
   return (
     <div className={styles.pageContainer}>
@@ -99,30 +124,35 @@ const Checkout = () => {
       <section className={styles.sectionPurchase}>
         <h2>Cafés selecionados</h2>
         <div className={styles.purchaseContainer}>
-          {newCoffesList.map((coffee) => (
+          {cartItens.map((coffee) => (
             <SelectedCoffess coffee={coffee} key={coffee.id} />
           ))}
           <div className={styles.priceInfo}>
             <div className={styles.priceProducts}>
               <p>Preço dos Produtos</p>
               <span>
-                R$ <strong>33,20</strong>
+                R$ <strong>{productsPrice}</strong>
               </span>
             </div>
             <div className={styles.priceDelivery}>
               <p>Entrega</p>
               <span>
-                R$ <strong>33,20</strong>
+                R$ <strong>{deliveryPrice}</strong>
               </span>
             </div>
             <div className={styles.priceTotal}>
               <p>Total</p>
               <span>
-                R$ <strong>33,20</strong>
+                R$ <strong>{totalOrderPrice}</strong>
               </span>
             </div>
           </div>
-          <button className={styles.purchaseConfirm}>CONFIRMAR COMPRA</button>
+          <button
+            onClick={() => console.log(cartItens)}
+            className={styles.purchaseConfirm}
+          >
+            CONFIRMAR COMPRA
+          </button>
         </div>
       </section>
     </div>
