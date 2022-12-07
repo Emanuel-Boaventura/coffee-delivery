@@ -94,6 +94,21 @@
             display: grid;
             gap: 0.75rem;
             grid-template-columns: 30% auto;
+
+            .optional {
+              position: relative;
+              &::after {
+                content: 'Opcional';
+                position: absolute;
+                top: 0.75rem;
+                right: 0.75rem;
+                font-size: 0.75rem;
+                font-style: italic;
+                color: var(--base-label);
+                top: 50%;
+                transform: translateY(-50%);
+              }
+            }
           }
           .fourthPart {
             display: grid;

@@ -105,7 +105,6 @@ const Checkout = () => {
     )
       return setEmptyInputs(true);
     setEmptyInputs(false);
-    console.log('salvando...');
     saveAdressInfo(cepData);
   }
 
@@ -164,20 +163,25 @@ const Checkout = () => {
                   placeholder='Bairro'
                   disabled={disableBairro}
                 />
-                <input
-                  value={cepData?.complemento}
-                  onChange={(e) =>
-                    setCepData({ ...cepData, complemento: e.target.value })
-                  }
-                  type='text'
-                  placeholder='Complemento'
-                />
+                <div className={`${!cepData.complemento && styles.optional}`}>
+                  <input
+                    value={cepData?.complemento}
+                    onChange={(e) =>
+                      setCepData({ ...cepData, complemento: e.target.value })
+                    }
+                    type='text'
+                    placeholder='Complemento'
+                  />
+                </div>
               </div>
               <div className={styles.fourthPart}>
                 <input
                   value={cepData?.numero}
                   onChange={(e) =>
-                    setCepData({ ...cepData, numero: e.target.value })
+                    setCepData({
+                      ...cepData,
+                      numero: e.target.value,
+                    })
                   }
                   type='number'
                   placeholder='Número'
