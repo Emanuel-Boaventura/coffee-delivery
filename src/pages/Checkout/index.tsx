@@ -11,14 +11,16 @@ import styles from './Checkout.module.scss';
 import { CartContext } from '../../providers/CartContext';
 import currencyMask from '../../utils/currencyMask';
 import axios from 'axios';
+import { AddressContext } from '../../providers/AddressContext';
 
 interface ICEP {
+  cep: string;
   logradouro: string;
   complemento: string;
   bairro: string;
   localidade: string;
   uf: string;
-  numero?: string;
+  numero: string;
 }
 
 const Checkout = () => {
@@ -30,6 +32,7 @@ const Checkout = () => {
   const deliveryPricePerCoffe = 150; // 150 / 100 = 1.5 que convertem em R$ 1,50
 
   const { cartItens } = useContext(CartContext);
+  const { saveAdressInfo } = useContext(AddressContext);
 
   const buttonsObject = [
     {
@@ -63,22 +66,34 @@ const Checkout = () => {
 
   let totalOrderPrice = productsPrice + deliveryPrice;
 
-  async function getCepData(cep: string) {
+  async function getCepData(cepInput: string) {
     try {
       // setLoading(true);
-      const { data } = await axios.get(`http://viacep.com.br/ws/${cep}/json/`);
-      const { logradouro, complemento, bairro, localidade, uf } = data;
+      const { data } = await axios.get(
+        `http://viacep.com.br/ws/${cepInput}/json/`
+      );
+      const { cep, logradouro, complemento, bairro, localidade, uf } = data;
 
       logradouro ? setDisableLogradouro(true) : setDisableLogradouro(false);
       bairro ? setDisableBairro(true) : setDisableBairro(false);
 
-      setCepData({ logradouro, complemento, bairro, localidade, uf });
+      setCepData({
+        cep,
+        logradouro,
+        complemento,
+        bairro,
+        localidade,
+        uf,
+        numero: '',
+      });
     } catch (error) {
       console.error('erro: ', error);
     } finally {
       // setLoading(false);
     }
   }
+
+  function validation() {}
 
   return (
     <div className={styles.pageContainer}>
@@ -92,70 +107,84 @@ const Checkout = () => {
               <p>Informe o endereço onde deseja receber seu pedido</p>
             </div>
           </header>
+          <main className={styles.deliveryInfo}>
+            <div className={styles.inputContainer}>
+              <div className={styles.firstPart}>
+                <input
+                  onChange={(e) => {
+                    const formatedCep = e.target.value
+                      .replace(/\D/g, '')
+                      .replace(/(\d{5})(\d)/, '$1-$2')
+                      .replace(/(-\d{3})\d+?$/, '$1');
 
-          <main className={styles.inputContainer}>
-            <div className={styles.firstPart}>
-              <input
-                onChange={(e) => {
-                  if (e.target.value.length === 8) getCepData(e.target.value);
-                }}
-                type='text'
-                maxLength={8}
-                placeholder='CEP'
-              />
-            </div>
-            <div className={styles.secondPart}>
-              <input
-                value={cepData?.logradouro}
-                onChange={(e) =>
-                  setCepData({ ...cepData, logradouro: e.target.value })
-                }
-                type='text'
-                placeholder='Rua'
-                disabled={disableLogradouro}
-              />
-            </div>
-            <div className={styles.thirdPart}>
-              <input
-                value={cepData?.bairro}
-                onChange={(e) =>
-                  setCepData({ ...cepData, bairro: e.target.value })
-                }
-                type='text'
-                placeholder='Bairro'
-                disabled={disableBairro}
-              />
-              <input
-                value={cepData?.complemento}
-                onChange={(e) =>
-                  setCepData({ ...cepData, complemento: e.target.value })
-                }
-                type='text'
-                placeholder='Complemento'
-              />
-            </div>
-            <div className={styles.fourthPart}>
-              <input
-                value={cepData?.numero}
-                onChange={(e) =>
-                  setCepData({ ...cepData, numero: e.target.value })
-                }
-                type='number'
-                placeholder='Número'
-              />
+                    setCepData({ ...cepData, cep: formatedCep });
+                    if (formatedCep.length === 9) getCepData(formatedCep);
+                  }}
+                  value={cepData.cep}
+                  type='text'
+                  maxLength={9}
+                  placeholder='CEP'
+                />
+              </div>
+              <div className={styles.secondPart}>
+                <input
+                  value={cepData?.logradouro}
+                  onChange={(e) =>
+                    setCepData({ ...cepData, logradouro: e.target.value })
+                  }
+                  type='text'
+                  placeholder='Rua'
+                  disabled={disableLogradouro}
+                />
+              </div>
+              <div className={styles.thirdPart}>
+                <input
+                  value={cepData?.bairro}
+                  onChange={(e) =>
+                    setCepData({ ...cepData, bairro: e.target.value })
+                  }
+                  type='text'
+                  placeholder='Bairro'
+                  disabled={disableBairro}
+                />
+                <input
+                  value={cepData?.complemento}
+                  onChange={(e) =>
+                    setCepData({ ...cepData, complemento: e.target.value })
+                  }
+                  type='text'
+                  placeholder='Complemento'
+                />
+              </div>
+              <div className={styles.fourthPart}>
+                <input
+                  value={cepData?.numero}
+                  onChange={(e) =>
+                    setCepData({ ...cepData, numero: e.target.value })
+                  }
+                  type='number'
+                  placeholder='Número'
+                />
 
-              <input
-                value={cepData?.localidade}
-                type='text'
-                placeholder='Cidade'
-                disabled
-              />
-              <input
-                value={cepData?.uf}
-                type='text'
-                placeholder='UF'
-                disabled
-              />
+                <input
+                  value={cepData?.localidade}
+                  type='text'
+                  placeholder='Cidade'
+                  disabled
+                />
+                <input
+                  value={cepData?.uf}
+                  type='text'
+                  placeholder='UF'
+                  disabled
+                />
+              </div>
+              <button
+                onClick={() => validation()}
+                className={styles.purchaseConfirm}
+              >
+                Salvar
+              </button>
             </div>
           </main>
         </section>
