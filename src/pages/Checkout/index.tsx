@@ -28,6 +28,7 @@ const Checkout = () => {
   const [cepData, setCepData] = useState<ICEP>({} as ICEP);
   const [disableBairro, setDisableBairro] = useState(true);
   const [disableLogradouro, setDisableLogradouro] = useState(true);
+  const [emptyInputs, setEmptyInputs] = useState(false);
 
   const deliveryPricePerCoffe = 150; // 150 / 100 = 1.5 que convertem em R$ 1,50
 
@@ -93,7 +94,20 @@ const Checkout = () => {
     }
   }
 
-  function validation() {}
+  function validation() {
+    if (
+      !cepData.cep ||
+      !cepData.bairro ||
+      !cepData.uf ||
+      !cepData.localidade ||
+      !cepData.logradouro ||
+      !cepData.numero
+    )
+      return setEmptyInputs(true);
+    setEmptyInputs(false);
+    console.log('salvando...');
+    saveAdressInfo(cepData);
+  }
 
   return (
     <div className={styles.pageContainer}>
@@ -125,6 +139,9 @@ const Checkout = () => {
                   maxLength={9}
                   placeholder='CEP'
                 />
+                <span className={`${emptyInputs && styles.emptyInputs}`}>
+                  Prencha todos os campos obrigatórios
+                </span>
               </div>
               <div className={styles.secondPart}>
                 <input
@@ -179,12 +196,7 @@ const Checkout = () => {
                   disabled
                 />
               </div>
-              <button
-                onClick={() => validation()}
-                className={styles.purchaseConfirm}
-              >
-                Salvar
-              </button>
+              <button onClick={() => validation()}>Salvar</button>
             </div>
           </main>
         </section>

@@ -73,7 +73,17 @@
 
           .firstPart {
             display: grid;
-            grid-template-columns: 30%;
+            gap: 3rem;
+            align-items: center;
+            grid-template-columns: 30% auto;
+
+            span {
+              display: none;
+              &.emptyInputs {
+                display: flex;
+                color: red;
+              }
+            }
           }
           .secondPart {
             display: grid;
