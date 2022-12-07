@@ -10,9 +10,23 @@ import SelectedCoffess from '../../components/SelectedCoffees';
 import styles from './Checkout.module.scss';
 import { CartContext } from '../../providers/CartContext';
 import currencyMask from '../../utils/currencyMask';
+import axios from 'axios';
+
+interface ICEP {
+  logradouro: string;
+  complemento: string;
+  bairro: string;
+  localidade: string;
+  uf: string;
+  numero?: string;
+}
 
 const Checkout = () => {
   const [paymentMethod, setPaymentMethod] = useState('');
+  const [cepData, setCepData] = useState<ICEP>({} as ICEP);
+  const [disableBairro, setDisableBairro] = useState(true);
+  const [disableLogradouro, setDisableLogradouro] = useState(true);
+
   const deliveryPricePerCoffe = 150; // 150 / 100 = 1.5 que convertem em R$ 1,50
 
   const { cartItens } = useContext(CartContext);
@@ -49,6 +63,23 @@ const Checkout = () => {
 
   let totalOrderPrice = productsPrice + deliveryPrice;
 
+  async function getCepData(cep: string) {
+    try {
+      // setLoading(true);
+      const { data } = await axios.get(`http://viacep.com.br/ws/${cep}/json/`);
+      const { logradouro, complemento, bairro, localidade, uf } = data;
+
+      logradouro ? setDisableLogradouro(true) : setDisableLogradouro(false);
+      bairro ? setDisableBairro(true) : setDisableBairro(false);
+
+      setCepData({ logradouro, complemento, bairro, localidade, uf });
+    } catch (error) {
+      console.error('erro: ', error);
+    } finally {
+      // setLoading(false);
+    }
+  }
+
   return (
     <div className={styles.pageContainer}>
       <div className={styles.infoContainer}>
@@ -61,27 +92,70 @@ const Checkout = () => {
               <p>Informe o endereço onde deseja receber seu pedido</p>
             </div>
           </header>
+
           <main className={styles.inputContainer}>
             <div className={styles.firstPart}>
-              <input type='text' placeholder='CEP' />
+              <input
+                onChange={(e) => {
+                  if (e.target.value.length === 8) getCepData(e.target.value);
+                }}
+                type='text'
+                maxLength={8}
+                placeholder='CEP'
+              />
             </div>
             <div className={styles.secondPart}>
-              <input type='text' placeholder='Rua' />
+              <input
+                value={cepData?.logradouro}
+                onChange={(e) =>
+                  setCepData({ ...cepData, logradouro: e.target.value })
+                }
+                type='text'
+                placeholder='Rua'
+                disabled={disableLogradouro}
+              />
             </div>
             <div className={styles.thirdPart}>
-              <input type='number' placeholder='Número' />
-              <input type='text' placeholder='Complemento' />
+              <input
+                value={cepData?.bairro}
+                onChange={(e) =>
+                  setCepData({ ...cepData, bairro: e.target.value })
+                }
+                type='text'
+                placeholder='Bairro'
+                disabled={disableBairro}
+              />
+              <input
+                value={cepData?.complemento}
+                onChange={(e) =>
+                  setCepData({ ...cepData, complemento: e.target.value })
+                }
+                type='text'
+                placeholder='Complemento'
+              />
             </div>
             <div className={styles.fourthPart}>
-              <input type='text' placeholder='Bairro' />
-              <select>
-                <option value=''>Select your option</option>
-                <option value='hurr'>Durr</option>
-              </select>
-              <select>
-                <option value=''>UF</option>
-                <option value='hurr'>Durr</option>
-              </select>
+              <input
+                value={cepData?.numero}
+                onChange={(e) =>
+                  setCepData({ ...cepData, numero: e.target.value })
+                }
+                type='number'
+                placeholder='Número'
+              />
+
+              <input
+                value={cepData?.localidade}
+                type='text'
+                placeholder='Cidade'
+                disabled
+              />
+              <input
+                value={cepData?.uf}
+                type='text'
+                placeholder='UF'
+                disabled
+              />
             </div>
           </main>
         </section>
@@ -139,14 +213,7 @@ const Checkout = () => {
               </span>
             </div>
           </div>
-          <button
-            onClick={() => {
-              console.log('teste');
-            }}
-            className={styles.purchaseConfirm}
-          >
-            CONFIRMAR COMPRA
-          </button>
+          <button className={styles.purchaseConfirm}>CONFIRMAR COMPRA</button>
         </div>
       </section>
     </div>

@@ -64,6 +64,10 @@
             border: 1px solid var(--yellow-dark);
             box-shadow: none;
           }
+
+          &:disabled {
+            background-color: var(--base-button);
+          }
         }
 
         .firstPart {
@@ -83,7 +87,7 @@
         .fourthPart {
           display: grid;
           gap: 0.75rem;
-          grid-template-columns: 30% 1fr 12%;
+          grid-template-columns: 30% 1fr 10%;
         }
       }
     }
