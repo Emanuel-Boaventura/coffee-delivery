@@ -8,7 +8,7 @@ import Card from '../../components/Card';
 const Home = () => {
   return (
     <div className={styles.pageContainer}>
-      <header className={styles.header}>
+      <section className={styles.header}>
         <div className={styles.headerText}>
           <h1 className={styles.title}>
             Encontre o café perfeito para qualquer hora do dia
@@ -45,15 +45,15 @@ const Home = () => {
           </div>
         </div>
         <img className={styles.headerImage} src={home} alt='' />
-      </header>
-      <main className={styles.main}>
+      </section>
+      <section className={styles.main}>
         <h2 className={styles.sectionTitle}>Nossos cafés</h2>
-        <div className={styles.coffeesContainer}>
+        <article className={styles.coffeesContainer}>
           {coffees.map((coffee) => (
             <Card coffee={coffee} key={coffee.id} />
           ))}
-        </div>
-      </main>
+        </article>
+      </section>
     </div>
   );
 };

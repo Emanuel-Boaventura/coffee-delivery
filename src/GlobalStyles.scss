@@ -33,16 +33,18 @@
   font-weight: normal;
 }
 
-html {
-  overflow: scroll;
+body {
+  max-width: 100vw;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
 ::-webkit-scrollbar {
   width: 0.5rem;
-  background: transparent;
+  background: var(--base-label);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--base-label);
+  background: var(--base-text);
   border-radius: 100px;
 }

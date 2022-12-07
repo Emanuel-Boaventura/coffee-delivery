@@ -25,10 +25,18 @@ interface ICEP {
 
 const Checkout = () => {
   const [paymentMethod, setPaymentMethod] = useState('');
-  const [cepData, setCepData] = useState<ICEP>({} as ICEP);
   const [disableBairro, setDisableBairro] = useState(true);
   const [disableLogradouro, setDisableLogradouro] = useState(true);
   const [emptyInputs, setEmptyInputs] = useState(false);
+  const [cepData, setCepData] = useState<ICEP>({
+    cep: '',
+    logradouro: '',
+    complemento: '',
+    bairro: '',
+    localidade: '',
+    uf: '',
+    numero: '',
+  } as ICEP);
 
   const deliveryPricePerCoffe = 150; // 150 / 100 = 1.5 que convertem em R$ 1,50
 
@@ -70,10 +78,9 @@ const Checkout = () => {
   async function getCepData(cepInput: string) {
     try {
       // setLoading(true);
-      const { data } = await axios.get(
-        `http://viacep.com.br/ws/${cepInput}/json/`
-      );
-      const { cep, logradouro, complemento, bairro, localidade, uf } = data;
+      const {
+        data: { cep, logradouro, complemento, bairro, localidade, uf },
+      } = await axios.get<ICEP>(`http://viacep.com.br/ws/${cepInput}/json/`);
 
       logradouro ? setDisableLogradouro(true) : setDisableLogradouro(false);
       bairro ? setDisableBairro(true) : setDisableBairro(false);

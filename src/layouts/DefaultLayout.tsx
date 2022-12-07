@@ -4,12 +4,12 @@ import styles from './DefaultLayout.module.scss';
 
 const DefaultLayout = () => {
   return (
-    <div className={styles.wrapperContentContainer}>
-      <div className={styles.contentContainer}>
-        <Header />
+    <>
+      <Header />
+      <main className={styles.mainContainer}>
         <Outlet />
-      </div>
-    </div>
+      </main>
+    </>
   );
 };
 

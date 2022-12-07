@@ -1,10 +1,14 @@
 .header {
   display: flex;
-  margin: 2rem 0;
-
-  .imageLink {
-    margin-right: auto;
-  }
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--base-card);
+  z-index: 10;
+  border-bottom: 2px solid var(--purple-light);
 
   .options {
     display: flex;

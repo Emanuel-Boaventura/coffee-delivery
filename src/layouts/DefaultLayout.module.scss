@@ -1,10 +1,8 @@
-.wrapperContentContainer {
-  margin: 0 auto;
-  max-width: 74rem;
-  .contentContainer {
-    display: flex;
-    flex-direction: column;
-    margin: 0 2rem;
-    margin-bottom: 10rem;
-  }
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  padding: 6rem 0 2.5rem;
 }
