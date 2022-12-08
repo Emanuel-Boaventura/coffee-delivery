@@ -1,6 +1,8 @@
 .pageContainer {
   display: flex;
   gap: 2rem;
+  width: 90vw;
+  justify-content: center;
   color: var(--base-title);
 
   h2 {
@@ -10,13 +12,18 @@
   }
 
   .infoContainer {
-    width: 40rem;
+    width: 44rem;
 
     .sectionHeader {
       display: flex;
+      align-items: center;
       gap: 0.5rem;
       color: var(--yellow-dark);
       margin-bottom: 2rem;
+
+      svg {
+        min-width: 38px;
+      }
 
       .sectionTitle {
         h3 {
@@ -75,10 +82,16 @@
             display: grid;
             gap: 3rem;
             align-items: center;
-            grid-template-columns: 30% auto;
+            grid-template-columns: 6rem auto;
+
+            // @media (max-width: 510px) {
+            //   grid-template-columns: 1fr;
+            // }
 
             span {
               display: none;
+              text-align: center;
+
               &.emptyInputs {
                 display: flex;
                 color: red;
@@ -93,7 +106,11 @@
           .thirdPart {
             display: grid;
             gap: 0.75rem;
-            grid-template-columns: 30% auto;
+            grid-template-columns: 35% auto;
+
+            @media (max-width: 708px) {
+              grid-template-columns: 1fr;
+            }
 
             .optional {
               position: relative;
@@ -110,10 +127,19 @@
               }
             }
           }
+
           .fourthPart {
             display: grid;
             gap: 0.75rem;
-            grid-template-columns: 30% 1fr 10%;
+            grid-template-columns: 5rem 1fr 3rem;
+
+            @media (max-width: 510px) {
+              grid-template-columns: 1fr 3rem;
+
+              input:first-child {
+                grid-column: 1 / -1;
+              }
+            }
           }
         }
 
@@ -183,6 +209,14 @@
             background-color: var(--purple-light);
             box-shadow: inset 0 0 0 1px var(--purple-dark);
           }
+
+          @media (max-width: 708px) {
+            flex-direction: column;
+
+            p {
+              text-align: center;
+            }
+          }
         }
       }
     }
@@ -190,6 +224,7 @@
 
   .sectionPurchase {
     width: 28rem;
+    min-width: 25rem;
 
     .purchaseContainer {
       padding: 2.5rem;
@@ -241,6 +276,25 @@
           background-color: var(--yellow-dark);
         }
       }
+    }
+  }
+
+  @media (max-width: 1119px) {
+    flex-direction: column;
+
+    .infoContainer {
+      width: 100%;
+    }
+
+    .sectionPurchase {
+      width: 100%;
+      min-width: 0;
+    }
+  }
+
+  @media (max-width: 510px) {
+    .sectionPurchase .purchaseContainer {
+      padding: 2rem 1rem;
     }
   }
 }

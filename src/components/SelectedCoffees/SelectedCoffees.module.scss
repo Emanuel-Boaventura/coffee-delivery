@@ -3,6 +3,8 @@
   border-bottom: 1px solid var(--base-button);
   padding-bottom: 1.5rem;
   margin-bottom: 1.5rem;
+  width: 100%;
+  align-items: center;
 
   img {
     width: 4rem;
@@ -53,9 +55,26 @@
       }
     }
   }
+
   span {
     font-weight: 700;
     color: var(--base-text);
     margin-left: auto;
+    text-align: center;
+  }
+
+  @media (max-width: 510px) {
+    img {
+      width: 2rem;
+      height: 2rem;
+    }
+
+    .removeBtn p {
+      display: none;
+    }
+
+    .coffeeType {
+      text-align: center;
+    }
   }
 }
