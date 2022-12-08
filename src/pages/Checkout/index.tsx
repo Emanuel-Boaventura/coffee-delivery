@@ -13,13 +13,14 @@ import currencyMask from '../../utils/currencyMask';
 import axios from 'axios';
 import { AddressContext, IAddressInfo } from '../../providers/AddressContext';
 import { useNavigate } from 'react-router-dom';
+import { PaymentContext } from '../../providers/PaymentContext';
 
 const Checkout = () => {
   const { cartItens } = useContext(CartContext);
   const { adressInfo, saveAdressInfo } = useContext(AddressContext);
+  const { paymentMethod, setPaymentMethod } = useContext(PaymentContext);
 
   const [cepData, setCepData] = useState<IAddressInfo>(adressInfo);
-  const [paymentMethod, setPaymentMethod] = useState('');
   const [disableBairro, setDisableBairro] = useState(true);
   const [disableLogradouro, setDisableLogradouro] = useState(true);
   const [emptyInfoInputs, setEmptyInfoInputs] = useState(false);
@@ -35,18 +36,15 @@ const Checkout = () => {
 
   const buttonsObject = [
     {
-      name: 'CARTÃO DE CRÉDITO',
-      value: 'credit',
+      value: 'Cartão de Crédito',
       icon: <CreditCard size={18} weight='bold' />,
     },
     {
-      name: 'CARTÃO DE DÉBITO',
-      value: 'debit',
+      value: 'Cartão de Débito',
       icon: <Bank size={18} weight='bold' />,
     },
     {
-      name: 'DINHEIRO',
-      value: 'money',
+      value: 'Dinheiro',
       icon: <Money size={18} weight='bold' />,
     },
   ];
@@ -242,7 +240,7 @@ const Checkout = () => {
                   }`}
                 >
                   <span className={styles.iconBtn}>{btn.icon}</span>
-                  <p>{btn.name}</p>
+                  <p>{btn.value}</p>
                 </button>
               );
             })}

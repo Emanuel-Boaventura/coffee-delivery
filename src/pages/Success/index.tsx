@@ -1,22 +1,30 @@
 import { CurrencyDollar, MapPin, Timer } from 'phosphor-react';
+import { useContext } from 'react';
 
 import illustration from '../../assets/Illustration.png';
+import { AddressContext } from '../../providers/AddressContext';
+import { PaymentContext } from '../../providers/PaymentContext';
 import styles from './Success.module.scss';
 
 const Success = () => {
-  const deliveryData = {
-    street: 'Rua João Daniel Martinelli',
-    number: 102,
-    district: 'Farrapos',
-    city: 'Porto Alegre',
-    uf: 'RS',
-    payment: 'Cartão de Crédito',
-  };
+  const {
+    adressInfo: { localidade, logradouro, numero, bairro, uf },
+  } = useContext(AddressContext);
+  const { paymentMethod } = useContext(PaymentContext);
+
+  // const deliveryData = {
+  //   street: 'Rua João Daniel Martinelli',
+  //   number: 102,
+  //   district: 'Farrapos',
+  //   city: 'Porto Alegre',
+  //   uf: 'RS',
+  //   payment: 'Cartão de Crédito',
+  // };
 
   const deliveryInfo = [
     {
-      infoTextLine1: `Entrega em ${deliveryData.district} - ${deliveryData.city},  ${deliveryData.uf}`,
-      infoTextLine2: `${deliveryData.street}, ${deliveryData.number}`,
+      infoTextLine1: `Entrega em ${bairro} - ${localidade},  ${uf}`,
+      infoTextLine2: `${logradouro}, ${numero}`,
       iconClass: styles.iconMapPin,
       icon: <MapPin size={16} weight='fill' />,
     },
@@ -28,7 +36,7 @@ const Success = () => {
     },
     {
       infoTextLine1: `Pagamento na entrega`,
-      infoTextLine2: `${deliveryData.payment}`,
+      infoTextLine2: `${paymentMethod}`,
       iconClass: styles.iconMoney,
       icon: <CurrencyDollar size={16} weight='fill' />,
     },
