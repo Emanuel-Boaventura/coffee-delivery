@@ -11,37 +11,20 @@ import styles from './Checkout.module.scss';
 import { CartContext } from '../../providers/CartContext';
 import currencyMask from '../../utils/currencyMask';
 import axios from 'axios';
-import { AddressContext } from '../../providers/AddressContext';
-
-interface ICEP {
-  cep: string;
-  logradouro: string;
-  complemento: string;
-  bairro: string;
-  localidade: string;
-  uf: string;
-  numero: string;
-}
+import { AddressContext, IAddressInfo } from '../../providers/AddressContext';
 
 const Checkout = () => {
+  const { cartItens } = useContext(CartContext);
+  const { adressInfo, saveAdressInfo } = useContext(AddressContext);
+
   const [paymentMethod, setPaymentMethod] = useState('');
   const [disableBairro, setDisableBairro] = useState(true);
   const [disableLogradouro, setDisableLogradouro] = useState(true);
   const [emptyInputs, setEmptyInputs] = useState(false);
-  const [cepData, setCepData] = useState<ICEP>({
-    cep: '',
-    logradouro: '',
-    complemento: '',
-    bairro: '',
-    localidade: '',
-    uf: '',
-    numero: '',
-  } as ICEP);
+  const [cepData, setCepData] = useState<IAddressInfo>(adressInfo);
+  const [loading, setLoading] = useState(false);
 
   const deliveryPricePerCoffe = 150; // 150 / 100 = 1.5 que convertem em R$ 1,50
-
-  const { cartItens } = useContext(CartContext);
-  const { saveAdressInfo } = useContext(AddressContext);
 
   const buttonsObject = [
     {
@@ -77,10 +60,12 @@ const Checkout = () => {
 
   async function getCepData(cepInput: string) {
     try {
-      // setLoading(true);
+      setLoading(true);
       const {
         data: { cep, logradouro, complemento, bairro, localidade, uf },
-      } = await axios.get<ICEP>(`http://viacep.com.br/ws/${cepInput}/json/`);
+      } = await axios.get<IAddressInfo>(
+        `http://viacep.com.br/ws/${cepInput}/json/`
+      );
 
       logradouro ? setDisableLogradouro(true) : setDisableLogradouro(false);
       bairro ? setDisableBairro(true) : setDisableBairro(false);
@@ -97,7 +82,7 @@ const Checkout = () => {
     } catch (error) {
       console.error('erro: ', error);
     } finally {
-      // setLoading(false);
+      setLoading(false);
     }
   }
 
@@ -127,7 +112,9 @@ const Checkout = () => {
               <p>Informe o endereço onde deseja receber seu pedido</p>
             </div>
           </header>
-          <main className={styles.deliveryInfo}>
+          <main
+            className={`${styles.deliveryInfo}  ${loading && styles.loading}`}
+          >
             <div className={styles.inputContainer}>
               <div className={styles.firstPart}>
                 <input

@@ -18,14 +18,21 @@ export interface IAddressInfo {
   uf: string;
   logradouro: string;
   bairro: string;
+  complemento: string;
+  cep: string;
   numero: string;
-  complemento?: string;
 }
 
 export const AdressProvider = ({ children }: IAdressProviderProps) => {
-  const [adressInfo, setAdressInfo] = useState<IAddressInfo>(
-    {} as IAddressInfo
-  );
+  const [adressInfo, setAdressInfo] = useState<IAddressInfo>({
+    localidade: '',
+    uf: '',
+    logradouro: '',
+    bairro: '',
+    complemento: '',
+    cep: '',
+    numero: '',
+  } as IAddressInfo);
 
   function saveAdressInfo(newAdressInfo: IAddressInfo) {
     setAdressInfo(newAdressInfo);
