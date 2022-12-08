@@ -18,14 +18,19 @@ const Header = () => {
         <img src={logo} alt='Coffee Delivery logomarca' />
       </NavLink>
       <div className={styles.options}>
-        <div className={styles.mapPinIcon}>
+        <NavLink
+          to='/checkout'
+          className={`${styles.mapPinIcon} ${
+            localidade && styles.withLocation
+          }`}
+        >
           <MapPin size={22} weight='fill'></MapPin>
           {localidade && uf && (
             <p>
               {localidade}, {uf}
             </p>
           )}
-        </div>
+        </NavLink>
         <NavLink className={styles.cartIcon} to='/checkout'>
           <ShoppingCart size={22} weight='fill' />
           <span

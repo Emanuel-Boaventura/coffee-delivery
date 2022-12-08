@@ -18,13 +18,24 @@
       display: flex;
       gap: 0.25rem;
       align-items: center;
+      color: var(--purple);
       padding: 0.5rem;
-      background-color: var(--purple-light);
-      color: var(--purple-dark);
       border-radius: 6px;
+      text-decoration: none;
 
       p {
         font-weight: 700;
+      }
+
+      &.withLocation {
+        background-color: var(--purple-light);
+        color: var(--purple-dark);
+      }
+
+      @media (max-width: 510px) {
+        p {
+          display: none;
+        }
       }
     }
 
