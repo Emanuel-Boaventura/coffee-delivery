@@ -50,7 +50,9 @@ const Home = () => {
         <h2 className={styles.sectionTitle}>Nossos cafés</h2>
         <article className={styles.coffeesContainer}>
           {coffees.map((coffee) => (
-            <Card coffee={coffee} key={coffee.id} />
+            <div className={styles.card} key={coffee.id}>
+              <Card coffee={coffee} />
+            </div>
           ))}
         </article>
       </section>
