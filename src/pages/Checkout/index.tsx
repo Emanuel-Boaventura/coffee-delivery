@@ -12,17 +12,24 @@ import { CartContext } from '../../providers/CartContext';
 import currencyMask from '../../utils/currencyMask';
 import axios from 'axios';
 import { AddressContext, IAddressInfo } from '../../providers/AddressContext';
+import { useNavigate } from 'react-router-dom';
 
 const Checkout = () => {
   const { cartItens } = useContext(CartContext);
   const { adressInfo, saveAdressInfo } = useContext(AddressContext);
 
+  const [cepData, setCepData] = useState<IAddressInfo>(adressInfo);
   const [paymentMethod, setPaymentMethod] = useState('');
   const [disableBairro, setDisableBairro] = useState(true);
   const [disableLogradouro, setDisableLogradouro] = useState(true);
-  const [emptyInputs, setEmptyInputs] = useState(false);
-  const [cepData, setCepData] = useState<IAddressInfo>(adressInfo);
+  const [emptyInfoInputs, setEmptyInfoInputs] = useState(false);
+
+  const [haveAdressInfo, setHaveAdressInfo] = useState(false);
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(false);
+  const [emptyCart, setEmptyCart] = useState(false);
+
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const deliveryPricePerCoffe = 150; // 150 / 100 = 1.5 que convertem em R$ 1,50
 
@@ -95,9 +102,25 @@ const Checkout = () => {
       !cepData.logradouro ||
       !cepData.numero
     )
-      return setEmptyInputs(true);
-    setEmptyInputs(false);
+      return setEmptyInfoInputs(true);
+    setEmptyInfoInputs(false);
     saveAdressInfo(cepData);
+  }
+
+  function purchase() {
+    let missingData = false;
+
+    adressInfo.cep
+      ? setHaveAdressInfo(false)
+      : (setHaveAdressInfo(true), (missingData = true));
+    cartItens.length > 0
+      ? setEmptyCart(false)
+      : (setEmptyCart(true), (missingData = true));
+    paymentMethod
+      ? setSelectedPaymentMethod(false)
+      : (setSelectedPaymentMethod(true), (missingData = true));
+
+    !missingData && navigate('/success');
   }
 
   return (
@@ -132,7 +155,7 @@ const Checkout = () => {
                   maxLength={9}
                   placeholder='CEP'
                 />
-                <span className={`${emptyInputs && styles.emptyInputs}`}>
+                <span className={`${emptyInfoInputs && styles.emptyInputs}`}>
                   Prencha todos os campos obrigatórios
                 </span>
               </div>
@@ -252,7 +275,23 @@ const Checkout = () => {
               </span>
             </div>
           </div>
-          <button className={styles.purchaseConfirm}>CONFIRMAR COMPRA</button>
+          <div className={styles.groupPurchaseConfirmButton}>
+            <button
+              onClick={() => purchase()}
+              className={styles.purchaseConfirm}
+            >
+              CONFIRMAR COMPRA
+            </button>
+            <span className={`${haveAdressInfo && styles.emptyInputs}`}>
+              Prencha as Informaçoes de Entrega
+            </span>
+            <span className={`${selectedPaymentMethod && styles.emptyInputs}`}>
+              Selecione um método de Pagameto
+            </span>
+            <span className={`${emptyCart && styles.emptyInputs}`}>
+              Selecione um café para compra
+            </span>
+          </div>
         </div>
       </section>
     </div>
