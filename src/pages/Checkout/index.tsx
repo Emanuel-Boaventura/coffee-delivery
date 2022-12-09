@@ -69,7 +69,7 @@ const Checkout = () => {
       const {
         data: { cep, logradouro, complemento, bairro, localidade, uf },
       } = await axios.get<IAddressInfo>(
-        `http://viacep.com.br/ws/${cepInput}/json/`
+        `https://viacep.com.br/ws/${cepInput}/json/`
       );
 
       logradouro ? setDisableLogradouro(true) : setDisableLogradouro(false);
